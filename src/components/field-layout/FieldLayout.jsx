@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import styles from "./field-layout.module.css";
-import { store } from "../../store";
-import { isWin } from "../../utils";
+import { useGameData } from "../../hooks";
 
 export const FieldLayout = () => {
-	const [gameData, setGameData] = useState(store.getState());
-	const { field, isGameEnding, isDraw, currentPlayer } = gameData;
-
-	useEffect(() => {
-		store.subscribe(() => setGameData(store.getState()));
-	}, []);
+	const { field, isGameEnding, isDraw, currentPlayer, store, isWin } =
+		useGameData();
 
 	const update = (index) => {
 		if (field[index] !== "" || isGameEnding || isDraw) {

@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
 import styles from "./information-layout.module.css";
-import { store } from "../../store";
+import { useGameData } from "../../hooks";
 
 export const InformationLayout = () => {
-	const [gameData, setGameData] = useState(store.getState());
-	const { currentPlayer, isDraw, isGameEnding } = gameData;
-
-	useEffect(() => {
-		store.subscribe(() => setGameData(store.getState()));
-	}, []);
+	const { currentPlayer, isDraw, isGameEnding, store } = useGameData();
 
 	let textInfo = `Ходит: ${currentPlayer}`;
 	if (isDraw) {
